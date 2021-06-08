@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
     return ({
       ...state,
       favorites: state.favorites.filter(fav => {
-        return fav.id === action.payload;
+        return fav.id !== action.payload;
       })
     });
   default:
