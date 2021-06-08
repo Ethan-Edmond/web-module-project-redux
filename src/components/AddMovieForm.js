@@ -24,7 +24,10 @@ const AddMovieForm = (props) => {
     };
 
     const handleSubmit = (e) => {
-      props.addMovie(movie);
+      props.addMovie({
+        ...movie,
+        id: Date.now()
+      });
       push("/movies");
     };
 
