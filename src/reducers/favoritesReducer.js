@@ -13,10 +13,14 @@ const reducer = (state = initialState, action) => {
       displayFavorites: !state.displayFavorites
     });
   case(ADD_FAVORITE):
-    return ({
-      ...state,
-      favorites: [...state.favorites, action.payload]
-    });
+    if (state.favorites.some(fav => fav.id === action.payload.id)){
+      return state;
+    } else {
+      return ({
+        ...state,
+        favorites: [...state.favorites, action.payload]
+      });
+    }
   case(REMOVE_FAVORITE):
     return ({
       ...state,
