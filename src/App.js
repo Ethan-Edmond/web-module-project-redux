@@ -12,7 +12,8 @@ import AddMovieForm from './components/AddMovieForm';
 import FavoriteMovieList from './components/FavoriteMovieList';
 
 const App = props => {
-  const displayFavorites = true;
+  const displayFavorites = props.displayFavorites;
+  const favorites = props.favorites;
 
   return (
     <div>
@@ -23,8 +24,8 @@ const App = props => {
       <div className="container">
         <MovieHeader/>
         <div className="row ">
-          {displayFavorites && <FavoriteMovieList/>}
-        
+          {(displayFavorites && (favorites.length !== 0)) && <FavoriteMovieList/>}
+
           <Switch>
             <Route exact path="/movies/add">
               <AddMovieForm />
@@ -48,4 +49,11 @@ const App = props => {
   );
 };
 
-export default App;
+const stateToProps = (state) => {
+  return {
+    favorites: state.favorites.favorites,
+    displayFavorites: state.favorites.displayFavorites
+  };
+};
+
+export default connect(stateToProps)(App);
